@@ -1,26 +1,22 @@
 ---
-title: 'PokémonĀkaibu'
+title: 'F L I C K T I O N A R Y'
 shortDescription: 'Modular Vanilla JS Pokédex'
-description: 'PokémonĀkaibu is a responsive, client-side web app built with vanilla JavaScript, HTML, and CSS, styled with Bootstrap. It fetches data from the PokéAPI in batches to support infinite scrolling, dynamically renders each Pokémon as an interactive entry, and uses modals for detailed views. The project is modular, performance-optimized, and includes polyfills for broader browser compatibility.'
-pubDate: 2025-05-01
-heroImage: '../../assets/images/pokemon_home.png'
+description: 'Flicktionary is a responsive, client-side web app built with vanilla JavaScript, HTML, and CSS, styled with Bootstrap. It fetches data from the PokéAPI in batches to support infinite scrolling, dynamically renders each Pokémon as an interactive entry, and uses modals for detailed views. The project is modular, performance-optimized, and includes polyfills for broader browser compatibility.'
+pubDate: 2025-05-02
+heroImage: '../../assets/images/flicktionary_home.png'
 gallery:
-  - path: '../../assets/images/pokemon_home.png'
+  - path: '../../assets/images/flicktionary_home.png'
     description: 'Home screen'
     slug: 'home'
-    class: ''
-  - path: '../../assets/images/pokemon_detail.png'
-    description: 'Detail modal'
+    class: 'two--l'
+  - path: '../../assets/images/flicktionary_documentation.png'
+    description: 'Documentation page'
     slug: 'detail'
     class: ''
-  # - path: '../../assets/images/pokemon_search.png'
-  #   description: 'Search feature'
-  #   slug: 'search'
-  #   class: ''
 links:
-  - url: 'https://github.com/nicovece/pokemonakaibu'
+  - url: 'https://github.com/nicovece/flicktionary'
     text: 'Github repository'
-  - url: 'https://nicovece.github.io/pokemonakaibu/'
+  - url: 'https://flicktionary.onrender.com/'
     text: 'Live website'
 niceName: 'pokemonakaibu'
 ---

@@ -32,6 +32,7 @@ const projects = defineCollection({
             path: image(),
             description: z.string(),
             slug: z.string(),
+            class: z.string().optional(),
           })
         )
         .optional(),

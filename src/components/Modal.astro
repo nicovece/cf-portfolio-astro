@@ -53,11 +53,21 @@ const {
         {
           closeIcon && (
             <span class="modal-close-icon">
-              <svg width="20" height="2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill="currentColor" d="M20 .5v1H0v-1z" />
+              <svg width="20" height="4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M20 .5v1H0v-1z"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="4"
+                />
               </svg>
-              <svg width="20" height="2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill="currentColor" d="M20 .5v1H0v-1z" />
+              <svg width="20" height="4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M20 .5v1H0v-1z"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="4"
+                />
               </svg>
             </span>
           )
@@ -238,7 +248,7 @@ const {
   .modal::backdrop {
     opacity: 0;
     backdrop-filter: blur(5px);
-    background-color: rgba(0 0 0 / 0.5);
+    background-color: rgba(0 0 0 / 0.65);
 
     @media (prefers-reduced-motion: no-preference) {
       transition-behavior: allow-discrete;
@@ -266,6 +276,9 @@ const {
     align-self: flex-end;
     inset-block-start: 1.5rem;
     inset-inline-end: 1.5rem;
+    background-color: red;
+    border-radius: 50%;
+    padding: 0.5rem;
   }
 
   :where(.modal-close button) {
@@ -310,8 +323,9 @@ const {
     }
   }
 
+  /* :where(.modal-close button:focus-visible) .modal-close-icon, */
   :where(.modal-close button:hover) .modal-close-icon,
-  :where(.modal-close button:focus-visible) .modal-close-icon {
+  :where(.modal-close button:active) .modal-close-icon {
     svg:first-of-type {
       transform: rotate(0deg);
     }
