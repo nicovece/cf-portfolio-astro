@@ -1,7 +1,7 @@
 ---
-title: 'F L I C K T I O N A R Y'
-shortDescription: 'Modular Vanilla JS Pokédex'
-description: 'Flicktionary is a responsive, client-side web app built with vanilla JavaScript, HTML, and CSS, styled with Bootstrap. It fetches data from the PokéAPI in batches to support infinite scrolling, dynamically renders each Pokémon as an interactive entry, and uses modals for detailed views. The project is modular, performance-optimized, and includes polyfills for broader browser compatibility.'
+title: 'Flicktionary'
+shortDescription: 'A dictionary, but only for flicks.'
+description: 'Flicktionary is a secure, full-stack web app built with Node.js, Express, and MongoDB. It provides a RESTful API for movie and user data, supports JWT authentication, and offers advanced search and user management features. The project is modular, scalable, and designed for robust security and performance.'
 pubDate: 2025-05-02
 heroImage: '../../assets/images/flicktionary_home.png'
 gallery:
@@ -19,12 +19,25 @@ links:
   - url: 'https://flicktionary.onrender.com/'
     text: 'Live website'
 niceName: 'pokemonakaibu'
+stack:
+  - Node.js
+  - Express.js
+  - MongoDB & Mongoose
+  - Passport.js (JWT & local strategies)
+  - bcrypt (for password hashing)
+  - dotenv (for environment configuration)
+  - morgan (HTTP request logging)
+  - body-parser
+  - CORS
+  - JSDoc (for documentation)
+  - JavaScript (ES6+)
+  - HTML & CSS (for static documentation and landing pages)
 ---
 
-PokémonĀkaibu is a comprehensive, user-friendly online archive designed to provide Pokémon fans and researchers with detailed, easily accessible information about various Pokémon species, including their stats, abilities, and types.
+Flicktionary is a comprehensive, user-friendly online movie dictionary designed to provide film fans with detailed, easily accessible information about a diverse range of movies, including genres, directors, and descriptions.
 
-Built as a client-side web application using vanilla JavaScript, HTML, and CSS, with Bootstrap for responsive styling, it leverages the public PokéAPI to deliver an interactive and visually appealing data exploration experience across all devices.
+Built as a full-stack web application using Node.js, Express, and MongoDB, Flicktionary delivers a secure and interactive experience for exploring, searching, and curating favorite films.
 
-The app displays a scrollable list of Pokémon, each shown with its name and image. Users can load more entries as they scroll or use the search bar to filter Pokémon by name; search by ID is planned for future updates. Clicking on a Pokémon opens a modal window with detailed information, including stats, types, and abilities.
+Users can register, log in, update their profiles, and manage their favorite movies, all protected by JWT authentication.
 
-PokémonĀkaibu loads entries in batches for efficient data handling and infinite scrolling, and uses polyfills for Promises and Fetch to maintain compatibility with older browsers. The codebase is modular and optimized for maintainability, accessibility, and performance, ensuring a fast and smooth user experience. For optimal use, the project can also be run locally using a development server like the Live Server extension in Visual Studio Code.
+The API supports advanced search and filtering, and the backend is optimized for security, maintainability, and performance, ensuring a smooth user experience across all devices.
