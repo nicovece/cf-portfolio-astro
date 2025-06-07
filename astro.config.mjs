@@ -7,6 +7,10 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://nicovece.github.io/cf-portfolio-astro',
   base: '/cf-portfolio-astro/',
-  trailingSlash: 'never',
+  //trailingSlash: 'never',
   integrations: [mdx(), sitemap()],
+  outDir: './docs',
+  build: {
+    assets: 'assets'
+  }
 });
