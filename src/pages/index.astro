@@ -50,13 +50,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 					<!-- <a href="https://twitter.com/nicovece">twitter</a> -->
 				</h1>
 				<h1 class="margin-top">
-					<span>Feel free to poke around my <a href="/projects" class="link--intext">projects</a> or get to know me a bit better by <a href="/#about-me" class="link--intext">scrolling down</a>.</span>
+					<span>Feel free to poke around my <a href={`${import.meta.env.BASE_URL}projects`} class="link--intext">projects</a> or get to know me a bit better by <a href={`${import.meta.env.BASE_URL}#about-me`} class="link--intext">scrolling down</a>.</span>
 				</h1>
 			</div>
 		</section>
 		<section id="about-me" class="box--about bg--dark">
 				<div class="box--about__left">	
-					<img class="mugshot" src="/images/nico_vece.jpg" alt="Nico" />
+					<img class="mugshot" src={`${import.meta.env.BASE_URL}images/nico_vece.jpg`} alt="Nico" />
 				</div>
 				<div class="box--about__right">
 
