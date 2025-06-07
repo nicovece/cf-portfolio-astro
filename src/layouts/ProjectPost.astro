@@ -83,13 +83,13 @@ const { title, shortDescription, description, pubDate, heroImage, gallery, links
 						))}
 					</div>
 				)}
-			<div class="project--big__info">
+			<div class="project--big__info">	
 				{stack && (
 					<div class="project--big__stack">
 						<h5>Technologies Used</h5>
 						<ul>
 							{stack.map((stack) => (
-								<li>{stack}</li>
+								<li>{stack.name} {stack.description ? <small>({stack.description})</small> : ''}</li>
 							))}
 						</ul>
 					</div>
