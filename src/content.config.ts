@@ -45,6 +45,7 @@ const projects = defineCollection({
           })
         )
         .optional(),
+      stack: z.array(z.string()).optional(),
       // add other fields as needed
     }),
 });
