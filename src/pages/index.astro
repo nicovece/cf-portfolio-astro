@@ -1,0 +1,91 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style lang="scss">
+			.mugshot {
+				width: 100%;
+				max-width: 400px;
+				height: auto;
+				border-radius: 50%;
+				object-fit: cover;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<section id="home_intro" class="main main--home">
+					
+				<div class="main--home__content">
+					<h3 class="main--home__intro">
+						I swear that one day my portfolio will be online, maybe.
+					</h3>
+				<h1>
+					<span><strong>Ciao, io sono Nico</strong>.</span> I'm an
+					italian designer and fullstack developer living in Berlin,
+					yet another one.
+				</h1>
+				<h1>
+					<span>We could talk about a lot of things</span>
+					<a href="mailto:m@nicovece.com">m@nicovece.com</a>
+					<a href="tel:+4917686712451">+49 176 86712451</a>
+					<a href="tel:+393791494041">+39 379 1494041</a>
+					<!-- <a href="skype:nicovece?call">skype: nicovece</a> -->
+				</h1>
+				<h1>
+					<span>I probably should work on my social media presence as
+						well</span>
+					<a href="https://github.com/nicovece">github</a>
+					<a href="https://www.linkedin.com/in/nicovece/">linkedin</a>
+					<a href="https://instagram.com/nicovece">instagram</a>
+					<a href="https://mastodon.social/@nicovece">mastodon</a>
+					<!-- <a href="https://www.flickr.com/photos/lightsumo/">flickr</a> -->
+					<!-- <a href="https://twitter.com/nicovece">twitter</a> -->
+				</h1>
+				<h1 class="margin-top">
+					<span>Feel free to poke around my <a href="/projects" class="link--intext">projects</a> or get to know me a bit better by <a href="/#about-me" class="link--intext">scrolling down</a>.</span>
+				</h1>
+			</div>
+		</section>
+		<section id="about-me" class="box--about bg--dark">
+				<div class="box--about__left">	
+					<img class="mugshot" src="/images/nico_vece.jpg" alt="Nico" />
+				</div>
+				<div class="box--about__right">
+
+	<h4>Nico Vece</h4>
+	<p>
+			I had design training but learned development on my own. The topics are becoming more interesting yet
+			increasingly complicated to study independently.
+	</p>
+	<p>
+			I remain committed to expanding my expertise to serve others better through a Full-Stack developer
+			course.
+	</p>
+	<p>
+			My career has been a proud journey of continuous growth. After gaining design knowledge at university, I
+			found a mentor who guided my training as a graphic designer. During this period, I developed a passion
+			for web development.
+	</p>
+	<p>
+			After three years, my mentor invited me to partner in his firm, where I managed the web and digital
+			department, gaining expertise in both design and development.
+	</p>
+	<p>å
+			In 2012, I left the partnership to freelance as a consultant, and I'm pleased that many collaborations
+			have continued since then, significantly enhancing my development skills through diverse projects.
+	</p>
+	<a href="files/nico_vece-curriculum.pdf" class="text_link text_link--on_dark" download=""><strong>Download my CV</strong></a>
+
+</div>
+		</section>
+		<Footer />
+	</body>
+</html>

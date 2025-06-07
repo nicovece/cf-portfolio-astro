@@ -1,0 +1,83 @@
+---
+import HeaderLink from './HeaderLink.astro';
+
+const isHome = Astro.url.pathname === "/";
+---
+
+
+<header class={isHome ? "home-header" : ""}>
+	<nav>
+		<!-- <div class="internal-links"> -->
+			{!isHome ? <HeaderLink href="/"><strong>Nico</strong></HeaderLink> : ""	}
+			<!-- <HeaderLink href="/blog">Blog</HeaderLink> -->
+			<HeaderLink href="/projects">Projects</HeaderLink>
+			<HeaderLink href="/#about-me">About</HeaderLink>
+			<HeaderLink href="/contact">Contact</HeaderLink>
+		<!-- </div> -->
+		
+	</nav>
+
+</header>
+<style lang="scss">
+	header {
+		margin: 0;
+		padding: 1rem calc(var(--modulo_base) * 1.2);
+		@media (min-width: 768px) {
+			padding: 1rem calc(var(--modulo_base) * 3) 0;
+		}
+		@media (min-width: 1024px) {
+			padding: 1rem calc(var(--modulo_base) * 3) 0;
+		}
+		@media (min-width: 1367px) {
+			padding: 1rem calc(var(--modulo_base) * 6) 0;
+		}
+	}
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: start;
+		gap: 1em;
+		a {
+			margin: 0;
+			padding: 0.5em;
+			color: var(---color--primary);
+			border-bottom: 4px solid transparent;
+			text-decoration: none;
+			font-weight: var(--font__weight--thin);
+			transition: border-bottom-color 0.3s ease;
+			font-size: 1rem;
+			&.header__link--nico {
+				color: var(--color--secondary);
+				font-weight: normal;
+			}
+			&.active,
+			&:active,
+			&:focus {
+				text-decoration: none;
+				border-bottom-color: var(--color--secondary);
+			}
+			@media (hover: hover) {
+				&:hover {
+					text-decoration: none;
+					border-bottom-color: var(--color--secondary);
+				}
+			}
+		}
+}
+	.social-links,
+	.social-links a {
+		display: flex;
+	}
+	@media (max-width: 720px) {
+		.social-links {
+			display: none;
+		}
+	}
+	.mugshot {
+		width: 100%;
+		max-width: 240px;
+		height: auto;
+		border-radius: 50%;
+		object-fit: cover;
+	}
+</style>

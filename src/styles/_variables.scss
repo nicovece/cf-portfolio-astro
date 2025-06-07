@@ -1,0 +1,32 @@
+:root {
+  --modulo_base: 2rem;
+  // --font__family--primary: ff-meta-web-pro, "Lucida Grande",
+  // 	"Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+  --font__family--primary: 'Signika', 'Lucida Grande', 'Lucida Sans Unicode',
+    Arial, Helvetica, sans-serif;
+  --font__weight--thin: 200;
+  --font__weight--normal: 300;
+  --font__weight--medium: 400;
+  --font__weight--bold: 500;
+  --color--primary: black;
+  --color--secondary: #ff0000;
+  --color--dark: #444;
+  --color--lightest: white;
+
+  --color_nu--primary: #ea514e;
+  --color_nu--primary-dark: #e32c26;
+  --color_nu--primary-text: #2f1010;
+  --color_nu--primary-text-medium: #5e201f;
+
+  // --font-size--big: 1.6rem;
+  --font-size--big: clamp(1.2rem, 1.5rem + 1.4vw, 1.5rem);
+  --font-size--normal: 1.25rem;
+
+  --fs-sm: clamp(0.96rem, 0.22vi + 0.91rem, 1.13rem);
+  --fs-base: clamp(1.2rem, 0.39vi + 1.11rem, 1.5rem);
+  --fs-md: clamp(1.5rem, 0.65vi + 1.35rem, 2rem);
+  --fs-lg: clamp(1.88rem, 1.03vi + 1.63rem, 2.67rem);
+  --fs-xl: clamp(2.34rem, 1.58vi + 1.97rem, 3.55rem);
+  --fs-xxl: clamp(2.93rem, 2.36vi + 2.38rem, 4.74rem);
+  --fs-xxxl: clamp(3.66rem, 3.46vi + 2.85rem, 6.31rem);
+}

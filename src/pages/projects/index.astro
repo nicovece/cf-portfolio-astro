@@ -1,0 +1,55 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { Image } from 'astro:assets';
+
+const projects = (await getCollection('projects')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+					{
+						projects.map((project) => (
+							<section class="project--big project--big--semitop renzopianog124">
+				<div class="project--big__header">
+					<h4>
+						<a class="text_link text_link--fwnormal project--big__title" href={`/projects/${project.id}/`}><strong>{project.data.title}</strong><span> - </span>{project.data.shortDescription}</a>
+					</h4>
+				</div>
+				<div class="project__items {project.data.niceName}">
+					<a class="two--l" href={`/projects/${project.id}/`}>
+						{/* <img src="https://nicovece.s3.eu-central-1.amazonaws.com/assets/images/ws_digital/g124/g124_thumb.jpg" alt="renzopianog124.com homepage screenshot" class=" lazyloaded"> */}
+						{project.data.heroImage && (
+										<Image width={720} height={360} src={project.data.heroImage} alt="" />
+									)}
+						<h6 class="lg-only">
+							{project.data.title} <span>{project.data.pubDate.getFullYear()}</span>
+						</h6>
+					</a>
+					<div class="project__item__description">
+						<p>
+						{project.data.description}
+					</p>
+					<a href={`/projects/${project.id}/`} class="text_link text_link--on_dark"><strong>Read more</strong></a>
+					</div>
+				</div>
+			</section>
+						))
+					}
+		</main>
+		<Footer />
+	</body>
+</html>
+
