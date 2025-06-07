@@ -20,18 +20,25 @@ links:
     text: 'Live website'
 niceName: 'pokemonakaibu'
 stack:
-  - Node.js
-  - Express.js
-  - MongoDB & Mongoose
-  - Passport.js (JWT & local strategies)
-  - bcrypt (for password hashing)
-  - dotenv (for environment configuration)
-  - morgan (HTTP request logging)
-  - body-parser
-  - CORS
-  - JSDoc (for documentation)
-  - JavaScript (ES6+)
-  - HTML & CSS (for static documentation and landing pages)
+  - name: Node.js
+  - name: Express.js
+  - name: MongoDB & Mongoose
+  - name: Passport.js
+    description: JWT & local strategies
+  - name: bcrypt
+    description: for password hashing
+  - name: dotenv
+    description: for environment configuration
+  - name: morgan
+    description: HTTP request logging
+  - name: body-parser
+  - name: CORS
+  - name: JSDoc
+    description: for documentation
+  - name: JavaScript
+    description: ES6+
+  - name: HTML & CSS
+    description: for static documentation and landing pages
 ---
 
 Flicktionary is a comprehensive, user-friendly online movie dictionary designed to provide film fans with detailed, easily accessible information about a diverse range of movies, including genres, directors, and descriptions.

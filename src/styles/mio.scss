@@ -503,8 +503,6 @@ img {
   }
   @media (min-width: 1440px) {
     max-width: 75vw;
-    padding: calc(var(--modulo_base) * 2) calc(var(--modulo_base) * 6)
-      var(--modulo_base);
   }
 }
 
@@ -658,26 +656,31 @@ img {
   h5 {
     margin-bottom: 0.5rem;
   }
+  ul {
+    padding-left: 1rem;
+    list-style: circle;
+    opacity: 0.9;
+    li {
+      margin-bottom: 0.5rem;
+      small {
+        font-style: italic;
+      }
+    }
+  }
   @media (min-width: 768px) {
-    max-width: 100%;
-    padding: 0 calc(var(--modulo_base) * 3.4) calc(var(--modulo_base) / 2)
-      calc(var(--modulo_base) * 3);
+    padding: calc(var(--modulo_base) * 2) calc(var(--modulo_base) * 3.4)
+      calc(var(--modulo_base) * 3) calc(var(--modulo_base) * 3);
   }
   @media (min-width: 1024px) {
     max-width: 80vw;
-    padding: var(--modulo_base) calc(var(--modulo_base) / 2) var(--modulo_base);
-    padding: calc(var(--modulo_base) * 2) calc(var(--modulo_base) * 3)
-      var(--modulo_base);
   }
   @media (min-width: 1367px) {
-    padding: calc(var(--modulo_base) * 2) calc(var(--modulo_base) * 6)
-      var(--modulo_base);
     font-size: var(--font-size--big);
   }
   @media (min-width: 1440px) {
     max-width: 75vw;
-    padding: calc(var(--modulo_base) * 2) calc(var(--modulo_base) * 6)
-      var(--modulo_base);
+    padding: calc(var(--modulo_base) * 3) calc(var(--modulo_base) * 6)
+      calc(var(--modulo_base) * 4);
   }
 }
 .navbar-project {
