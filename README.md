@@ -1,68 +1,118 @@
-# Astro Starter Kit: Blog
+# Nico Vece - Full Stack Developer Portfolio
 
-```sh
-npm create astro@latest -- --template blog
+Welcome to my portfolio!  
+This site showcases my journey as a designer-turned-full-stack developer, featuring selected projects and a bit about me. Built with [Astro](https://astro.build/), it's a playground for modern web technologies and a reflection of my growth as a developer.
+
+## 🚀 Live Demo
+
+- **[View Portfolio Online](https://nicovece.github.io/cf-portfolio-astro/)**
+- Download my [CV (PDF)](public/files/nico_vece-curriculum.pdf)
+
+## 🧑‍💻 About Me
+
+Ciao, I'm **Nico Vece**—an Italian designer and full-stack developer living in Berlin.  
+I started in design, learned development on my own, and am now expanding my expertise through a full-stack developer course. My career has been a journey of continuous growth, from graphic design to web development, agency partnership, and freelance consulting.
+
+## ✨ Features
+
+- **Project Gallery:** Explore real-world apps and experiments, each with tech stack, screenshots, and links.
+- **Responsive Design:** Works beautifully on all devices.
+- **Accessible:** Keyboard navigation, ARIA support, and semantic HTML.
+- **Downloadable CV:** [nico_vece-curriculum.pdf](public/files/nico_vece-curriculum.pdf)
+
+## 🛠️ Tech Stack
+
+- **Framework:** [Astro](https://astro.build/) (with MDX, RSS, Sitemap integrations)
+- **Styling:** SCSS, CSS custom properties, [mio.scss](src/styles/mio.scss)
+- **Content:** Markdown/MDX for projects
+- **Image Optimization:** [sharp](https://sharp.pixelplumbing.com/)
+- **Other:** [marked](https://marked.js.org/) for Markdown parsing
+
+## 📁 Project Structure
+
 ```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/blog)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/blog/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![blog](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
-
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
+.
 ├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+│   ├── components/    # Reusable UI components (Header, Footer, Modal, etc.)
+│   ├── layouts/       # Page and post layouts
+│   ├── pages/         # Main site pages (index, about, contact, projects)
+│   ├── content/       # Markdown/MDX for projects
+│   ├── styles/        # SCSS and CSS files
+│   └── assets/        # Images and static assets
+├── public/            # Static files (CV, images)
+├── astro.config.mjs   # Astro configuration
+├── package.json       # Project metadata and scripts
+└── README.md
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🏗️ Getting Started
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### Prerequisites
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [npm](https://www.npmjs.com/)
 
-Any static assets, like images, can be placed in the `public/` directory.
+### Installation
 
-## 🧞 Commands
+```bash
+git clone https://github.com/nicovece/cf-portfolio-astro.git
+cd cf-portfolio-astro
+npm install
+```
 
-All commands are run from the root of the project, from a terminal:
+### Development
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+```bash
+npm run dev
+```
 
-## 👀 Want to learn more?
+Open [http://localhost:4321](http://localhost:4321) to view the site locally.
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### Build for Production
 
-## Credit
+```bash
+npm run build
+```
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+The static site will be generated in the `docs/` directory (for GitHub Pages).
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+## 🖼️ Projects
+
+A few highlights from my portfolio:
+
+- **[Happenly Progressive Web Application](https://itshappenly.vercel.app/):**  
+  React PWA for discovering and visualizing events, with Google Calendar integration, offline support, and data visualization.  
+  [Source](https://github.com/nicovece/happenly)
+
+- **[NoodlesBowl React Native App](https://github.com/nicovece/NoodlesBowl):**  
+  Cross-platform mobile app for real-time chat, media sharing, and location features using Firebase and Expo.
+
+- **[PokémonĀkaibu](https://nicovece.github.io/pokemonakaibu/):**  
+  Modular Pokédex built with vanilla JS, HTML, CSS, and Bootstrap, fetching data from PokéAPI.
+
+...and more!  
+See the [Projects](https://nicovece.github.io/cf-portfolio-astro/projects) page for details.
+
+## 📬 Contact
+
+- Email: [m@nicovece.com](mailto:m@nicovece.com)
+- LinkedIn: [nicovece](https://www.linkedin.com/in/nicovece/)
+- GitHub: [nicovece](https://github.com/nicovece)
+- Instagram: [nicovece](https://instagram.com/nicovece)
+- Mastodon: [@nicovece@mastodon.social](https://mastodon.social/@nicovece)
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+> _"I remain committed to expanding my expertise to serve others better through a Full-Stack developer course."_
+
+---
