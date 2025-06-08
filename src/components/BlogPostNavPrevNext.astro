@@ -1,0 +1,92 @@
+---
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('projects'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const currentPostIndex = posts.findIndex((post) => post.id == Astro.params.slug);
+const previousPost = currentPostIndex + 1 === posts.length ? undefined : posts[currentPostIndex + 1];
+const nextPost = currentPostIndex === 0 ? undefined : posts[currentPostIndex - 1];
+---
+
+<!-- Thanks to John Dalesandro for his article on how to do this: 
+https://johndalesandro.com/blog/astro-adding-previous-and-next-post-navigation-links-to-blog/ -->
+
+{
+  (previousPost || nextPost) && (
+    <div class="projects__nav">  
+      <nav>
+        { nextPost && ( <p><span>Next Post:</span> <a href={`${import.meta.env.BASE_URL}projects/${nextPost.id}/`}><strong>{nextPost.data.title}</strong></a></p> ) }
+        { previousPost && ( <p><span>Previous Post:</span> <a href={`${import.meta.env.BASE_URL}projects/${previousPost.id}/`}><strong>{previousPost.data.title}</strong></a></p> ) }
+      </nav>
+    </div>
+  )
+}
+
+<style lang="scss">
+	.projects__nav {
+    padding: calc(var(--modulo_base) * 1.5) calc(var(--modulo_base) * 1.2 - 0.5em)
+    calc(var(--modulo_base) * 1.2);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1rem;
+    margin: 0 0 1rem;
+    @media (min-width: 768px) {
+      padding: calc(var(--modulo_base) * 3) calc(var(--modulo_base) * 3 - 0.5em) calc(var(--modulo_base) * 1.5);
+    }
+    @media (min-width: 1024px) {
+      padding: calc(var(--modulo_base) * 2.4) calc(var(--modulo_base) * 3 - 0.5em) calc(var(--modulo_base) * 1.5);
+    }
+    @media (min-width: 1366px) {
+      padding: calc(var(--modulo_base) * 2) calc(var(--modulo_base) * 3 - 0.5em)
+        calc(var(--modulo_base) * 2);
+    }
+		@media (min-width: 1440px) {
+			padding: calc(var(--modulo_base) * 2) calc(var(--modulo_base) * 6 - 0.5em)
+				calc(var(--modulo_base) * 2);
+		}
+  nav {
+		display: flex;
+    flex-direction: column;
+		align-items: start;
+		justify-content: start;
+		gap: 1em;
+    p {
+      margin: 0;
+			font-size: 1rem;
+			font-weight: var(--font__weight--thin);
+			color: var(---color--primary);
+      span {
+        padding: 0.5em;
+      }
+    }
+		a {
+			margin: 0;
+			padding: 0.5em;
+			border-bottom: 4px solid transparent;
+			font-size: 1rem;
+			font-weight: var(--font__weight--thin);
+			transition: border-bottom-color 0.3s ease;
+			text-decoration: none;
+			color: var(---color--primary);
+			&.header__link--nico {
+				color: var(--color--secondary);
+				font-weight: normal;
+			}
+			&.active,
+			&:active,
+			&:focus {
+				text-decoration: none;
+				border-bottom-color: var(--color--secondary);
+			}
+			@media (hover: hover) {
+				&:hover {
+					text-decoration: none;
+					border-bottom-color: var(--color--secondary);
+				}
+			}
+		}
+	}
+}
+</style>

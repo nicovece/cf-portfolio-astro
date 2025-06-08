@@ -1,7 +1,7 @@
 ---
-title: 'Flicktionary'
+title: 'Flicktionary RESTful API'
 shortDescription: 'A dictionary, but only for flicks.'
-description: 'Flicktionary is a secure, full-stack web app built with Node.js, Express, and MongoDB. It provides a RESTful API for movie and user data, supports JWT authentication, and offers advanced search and user management features. The project is modular, scalable, and designed for robust security and performance.'
+description: '**Flicktionary API** is a secure, full-stack web app built with **Node.js**, **Express**, and **MongoDB**. It provides a **RESTful API** for movie and user data, supports JWT authentication, and offers advanced search and user management features. The project is modular, scalable, and designed for robust security and performance.'
 pubDate: 2025-05-02
 heroImage: '../../assets/images/flicktionary_home.png'
 gallery:
@@ -18,7 +18,7 @@ links:
     text: 'Github repository'
   - url: 'https://flicktionary.onrender.com/'
     text: 'Live website'
-niceName: 'pokemonakaibu'
+niceName: 'flicktionary_api'
 stack:
   - name: Node.js
   - name: Express.js
@@ -41,9 +41,9 @@ stack:
     description: for static documentation and landing pages
 ---
 
-Flicktionary is a comprehensive, user-friendly online movie dictionary designed to provide film fans with detailed, easily accessible information about a diverse range of movies, including genres, directors, and descriptions.
+**Flicktionary** API is a comprehensive, user-friendly online movie dictionary designed to provide film fans with detailed, easily accessible information about a diverse range of movies, including genres, directors, and descriptions.
 
-Built as a full-stack web application using Node.js, Express, and MongoDB, Flicktionary delivers a secure and interactive experience for exploring, searching, and curating favorite films.
+Built as a full-stack web application using **Node.js**, **Express**, and **MongoDB**, **Flicktionary** delivers a secure and interactive experience for exploring, searching, and curating favorite films.
 
 Users can register, log in, update their profiles, and manage their favorite movies, all protected by JWT authentication.
 

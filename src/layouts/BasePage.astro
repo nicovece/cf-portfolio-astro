@@ -19,11 +19,8 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 	<body>
 		<Header />
-		<main>
+		<main class="main-content">
 			<article>
-				<div class="main main--dett">
-					<h4 class="page__title--big">{title}</h4>
-				</div>
 					<slot />
 			</article>
 		</main>

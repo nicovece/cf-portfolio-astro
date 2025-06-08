@@ -6,6 +6,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
+import { marked } from 'marked';
 
 const projects = (await getCollection('projects')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -39,9 +40,7 @@ const projects = (await getCollection('projects')).sort(
 						</h6>
 					</a>
 					<div class="project__item__description">
-						<p>
-						{project.data.description}
-					</p>
+						<p set:html={marked.parse(project.data.description)} />
 						<a href={`${import.meta.env.BASE_URL}projects/${project.id}/`} class="text_link text_link--on_dark"><strong>Read more</strong></a>
 					</div>
 				</div>
