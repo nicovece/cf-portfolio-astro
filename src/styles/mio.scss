@@ -653,6 +653,23 @@ img {
       max-width: 50%;
     }
   }
+  @media (min-width: 768px) {
+    .row-1 {
+      grid-row: 1;
+    }
+    .row-2 {
+      grid-row: 2;
+    }
+    .row-3 {
+      grid-row: 3;
+    }
+    .row-4 {
+      grid-row: 4;
+    }
+    .row-5 {
+      grid-row: 5;
+    }
+  }
 }
 .project__items__title {
   padding: calc(var(--modulo_base) * 2) calc(var(--modulo_base) * 1.2)
