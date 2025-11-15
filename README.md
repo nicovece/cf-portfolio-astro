@@ -23,7 +23,7 @@ I started in design, learned development on my own, and am now expanding my expe
 ## 🛠️ Tech Stack
 
 - **Framework:** [Astro](https://astro.build/) (with MDX, RSS, Sitemap integrations)
-- **Styling:** SCSS, CSS custom properties, [mio.scss](src/styles/mio.scss)
+- **Styling:** SCSS, CSS custom properties, [main.scss](src/styles/main.scss)
 - **Content:** Markdown/MDX for projects
 - **Image Optimization:** [sharp](https://sharp.pixelplumbing.com/)
 - **Other:** [marked](https://marked.js.org/) for Markdown parsing

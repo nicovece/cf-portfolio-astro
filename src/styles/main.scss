@@ -203,11 +203,19 @@ strong {
     display: block;
   }
 }
-p {
+p,
+ul {
   font-size: var(--font-size--normal);
   line-height: 1.8;
   @media (min-width: 1024px) {
   }
+}
+hr {
+  border: 0;
+  border-top: 1px solid;
+  border-top-color: lightgray;
+  margin: 2rem 0;
+  opacity: 0;
 }
 a.text_link {
   display: inline-block;
@@ -253,6 +261,7 @@ a.text_link {
   border-bottom: 1px solid;
   border-bottom-color: lightgray;
   font-weight: var(--font__weight--medium);
+  transition: all 0.2s ease;
   @media (hover: hover) {
     &:hover {
       color: var(--color--secondary);
@@ -364,8 +373,6 @@ img {
   .box--about__right {
     padding: 0 0 calc(var(--modulo_base) * 3) 0;
   }
-  .box--about__left {
-  }
   @media (min-width: 1024px) {
     flex-direction: row;
     .box--about__right {
@@ -461,6 +468,128 @@ img {
 }
 .project--big--det {
   margin-top: calc(var(--modulo_base) * 4);
+  .project--big__text,
+  .project__details {
+    p,
+    ul {
+      font-size: var(--font-size--small);
+      line-height: 1.6;
+    }
+    ul {
+      margin-bottom: 2rem;
+      padding-left: 1rem;
+    }
+    ul + hr {
+      margin-top: 1rem;
+    }
+    ul.list-unstyled {
+      list-style: none;
+      padding-left: 0;
+      li {
+        margin-bottom: 1rem;
+      }
+    }
+    h2 {
+      border-bottom: 1px solid;
+      border-bottom-color: lightgray;
+      padding-bottom: 1rem;
+      margin: 3rem 0 2rem 0;
+      font-weight: var(--font__weight--bold);
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+    h3 {
+      margin: 3rem 0 1.6rem 0;
+      font-size: var(--font-size--normal);
+    }
+    details {
+    }
+  }
+  .project__details {
+    padding-top: calc(var(--modulo_base) * 1.2);
+    transition: all 0.1s ease;
+    summary {
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      gap: 0.3em;
+      // margin-top: 3rem;
+      // padding: 0.3em 0;
+      font-size: var(--font-size--normal);
+      line-height: 1.8;
+      border-bottom: none;
+      cursor: pointer;
+      list-style: none;
+      margin: var(--modulo_base) calc(var(--modulo_base) * 1.2)
+        calc(var(--modulo_base) / 2);
+      @extend %link--intext;
+      .open {
+        display: block;
+      }
+      .close {
+        display: none;
+      }
+      &::-webkit-details-marker {
+        display: none;
+      }
+      &::marker {
+        display: none;
+      }
+      &::before {
+        content: '';
+        display: inline-block;
+        --b: 2px;
+        --c: #0000 90deg, currentColor 0;
+        width: 0.8em;
+        height: 0.8em;
+        aspect-ratio: 1;
+        vertical-align: middle;
+        background: conic-gradient(from 90deg at var(--b) var(--b), var(--c))
+          calc(100% + var(--b) / 2) calc(100% + var(--b) / 2) /
+          calc(50% + var(--b)) calc(50% + var(--b));
+        opacity: 0.5;
+        transition: transform 0.2s ease;
+      }
+      @media (min-width: 768px) {
+        max-width: 100%;
+        margin: 0 calc(var(--modulo_base) * 3.4) calc(var(--modulo_base) / 2)
+          calc(var(--modulo_base) * 3);
+      }
+      @media (min-width: 1024px) {
+        max-width: 80vw;
+        margin: 0 calc(var(--modulo_base) * 3) var(--modulo_base);
+      }
+      @media (min-width: 1367px) {
+        margin: 0 calc(var(--modulo_base) * 6) var(--modulo_base);
+        font-size: var(--font-size--big);
+      }
+      @media (min-width: 1440px) {
+        max-width: 75vw;
+      }
+    }
+    &[open] {
+      background-color: var(--color--dark);
+      summary {
+        color: var(--color--lightest);
+        .open {
+          display: none;
+        }
+        .close {
+          display: block;
+        }
+        &::before {
+          transform: rotate(45deg);
+        }
+        @media (hover: hover) {
+          &:hover {
+            color: var(--color_nu--primary);
+            border-bottom-color: var(--color--primary);
+          }
+        }
+      }
+    }
+  }
   @media (min-width: 768px) {
     margin-top: calc(var(--modulo_base) * 6);
   }
@@ -503,6 +632,10 @@ img {
   margin: 0 0 1rem;
   padding: var(--modulo_base) calc(var(--modulo_base) * 1.2)
     calc(var(--modulo_base) / 2);
+  &:has(+ .project__details) {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
   @media (min-width: 768px) {
     max-width: 100%;
     padding: 0 calc(var(--modulo_base) * 3.4) calc(var(--modulo_base) / 2)
@@ -695,6 +828,7 @@ img {
 .project--big__info {
   background-color: var(--color--darker);
 }
+.project--big__info_detail,
 .project--big__stack {
   padding: calc(var(--modulo_base) * 2) calc(var(--modulo_base) * 1.2);
   background-color: var(--color--darker);
