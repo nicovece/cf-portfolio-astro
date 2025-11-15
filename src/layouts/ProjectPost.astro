@@ -67,7 +67,7 @@ const { title, shortDescription, description, pubDate, heroImage, gallery, links
 					)}
 				</div>
 
-				<div class="project--big__text">
+				<div class="project--content">
 						<slot />
 				</div>
 				
@@ -100,6 +100,7 @@ const { title, shortDescription, description, pubDate, heroImage, gallery, links
 			<BlogPostNavPrevNext />
 		</main>
 		<Footer />
+		<!-- Script commented out - Modal.astro component handles all modal functionality
 		<script>
 			const dialog = document.querySelector("dialog");
 const showButton = document.querySelector("dialog + button");
@@ -116,5 +117,6 @@ closeButton.addEventListener("click", () => {
 });
 
 		</script>
+		-->
 	</body>
 </html>

@@ -26,52 +26,101 @@ links:
     text: 'Github repository'
   - url: 'https://cf-recipe-app.onrender.com/'
     text: 'Live website'
-niceName: 'flicktionary-angular'
+niceName: 'nomalyze-django'
 stack:
   - name: Python
   - name: Django 5.2
   - name: PostgreSQL
   - name: dj-database-url
-    description: for environment-based DB configuration
+    description: environment-based DB configuration
   - name: Pandas
-    description: for data processing and analytics
+    description: data processing and analytics
   - name: Matplotlib
-    description: for data visualization
-  - name: HTML5
+    description: data visualization
   - name: Tailwind CSS
-    description: for responsive design
-  - name: Django Templates
-    description: for dynamic content rendering
+    description: responsive UI
   - name: WhiteNoise
-    description: for serving static files
-  - name: Django Static Files
-    description: for static file management
+    description: serving static files in production
   - name: Gunicorn
-    description: for WSGI server in production
+    description: WSGI server in production
   - name: Render
-    description: for deployment (PaaS)
-  - name: pnpm
-    description: for package management
-  - name: django-browser-reload
-    description: for live-reloading during development
+    description: deployment / PaaS
+  - name: pnpm, django-browser-reload
+    description: developer experience
 ---
 
+<div class="project--big__text">
 ## Project Overview
 
-**Project**  
-Nomalyze – A recipe collection and analytics web app built with Django.
+**Nomalyze** is a Django web app for managing a personal recipe collection and analyzing it with simple charts. Nomalyze served as my final Django project and received positive feedback from my mentor for going beyond the minimum course requirements.
 
-**Role**  
-Solo full-stack developer (implementation, UX decisions within the brief, deployment).
+{/* prettier-ignore */}
+<ul className='list-unstyled'>
+  <li><strong>Role:</strong> Solo full-stack developer</li>
+  <li><strong>Context:</strong> Course project for a Full-Stack Web Development program</li>
+  <li><strong>Tech:</strong> Django, Python, PostgreSQL, HTML templates, Tailwind CSS, Pandas, Matplotlib, Render (PaaS)</li>
+</ul>
 
-**Context**  
-Nomalyze is a course project from my Full-Stack Web Development training. The assignment was to build a recipe-focused web application using Django and a relational database. I treated this project as a chance to go beyond a basic CRUD example and practice more realistic concerns such as data modeling, custom logic for “recipe difficulty,” simple analytics, and deployment to a production environment.
-
-**Tech stack**  
-Django, Python, PostgreSQL, HTML templates, Tailwind CSS, Pandas, Matplotlib, Render (PaaS).
+The brief was to build a recipe app with Django, including basic CRUD, a computed “difficulty” value, and some form of analytics. I treated it as a chance to practice real-world full-stack concerns: data modeling, business logic, and deployment.
 
 ---
 
+## What the app does
+
+From a user’s point of view, Nomalyze lets you:
+
+- Add, edit, and delete recipes in a simple interface
+- See each recipe’s difficulty (Easy, Medium, Intermediate, Hard)
+- Search and filter recipes by name, ingredients, max cooking time, and difficulty — including partial and wildcard matches (e.g. “Pasta al” also finds “Pasta al Pesto” and “Pasta all’Amatriciana”)
+- View basic analytics, such as difficulty distribution and common ingredients
+
+The difficulty calculation is intentionally simple and primarily serves as a learning exercise. It uses measurable fields (time and ingredients) to assign a label. It’s not intended to fully capture how professional cooks judge a recipe, but it shows how to turn a fuzzy idea into consistent, explainable code.
+
+---
+
+## Key implementation highlights
+
+{/* prettier-ignore */}
+<ul className='list-unstyled'>
+  <li><strong>Data model & CRUD:</strong> Designed Django models for recipes and
+    built standard CRUD views with templates, focusing on clear forms and
+    navigation.</li>
+  <li><strong>Difficulty logic:</strong> Encapsulated the difficulty rules in
+    Python so labels update automatically when a recipe is saved.</li>
+  <li><strong>Search & filters:</strong> Implemented combined filters (e.g. by
+    difficulty) and partial search queries using Django’s querying tools.</li>
+  <li><strong>Analytics:</strong> Pulled data into Pandas, aggregated it, and
+    rendered Matplotlib charts inside Django templates.</li>
+  <li><strong>Deployment:</strong> Configured separate dev/production settings,
+    used SQLite locally and PostgreSQL on Render, managed environment variables,
+    and set up static file handling.</li>
+</ul>
+
+---
+
+## What I learned
+
+Nomalyze gave me an end-to-end experience of building and shipping a Django app:
+
+- Translating a written brief into a data model and UI,
+- Expressing business rules as concrete, testable logic,
+- Integrating Python’s data stack into a web application,
+- Handling real deployment details like environment variables, production databases, and static assets.
+
+---
+
+It’s a course-based project, but it reflects how I approach full-stack work: clear requirements, pragmatic implementation, and an honest view of limitations and possible next steps.
+
+---
+
+{/* <div class="project--big__text"> */}
+
+</div>
+<details className='project__details'>
+  <summary><span className='open'>Read full case study</span><span className='close'>Collapse full case study</span></summary>
+
+<div className='project--big__info'>
+<div className='project--big__info_detail'>
 ## The Challenge
 
 The course brief asked for a Django-based recipe application where users could manage their own collection of dishes. Beyond simply storing recipes, the specification also introduced the idea of calculating how “difficult” a recipe is, and surfacing some basic statistics about the overall collection.
@@ -262,15 +311,6 @@ If I decide to revisit Nomalyze in the future, some natural extensions would be:
 
 These are not features I am actively working on right now, but they represent clear next steps if I choose to evolve the project further or revisit it to practice more advanced topics.
 
----
-
-## What I Learned as a Junior Developer
-
-Working on Nomalyze gave me a realistic end-to-end experience of building and shipping a web application:
-
-- I saw how early decisions in the data model affect everything that comes later.
-- I practiced expressing business rules and fuzzy concepts as concrete, testable logic.
-- I learned how to integrate Python’s data stack into a web app, not just use it in notebooks.
-- I became more comfortable handling deployment details: environment variables, production databases, and static files.
-
-Overall, this project gave me a solid foundation in Django and full-stack thinking: understanding not just how to make something work locally, but how to structure it, deploy it, and explain it clearly to others.
+</div>
+</div>
+</details>
