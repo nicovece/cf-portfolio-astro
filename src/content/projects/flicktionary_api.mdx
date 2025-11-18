@@ -41,13 +41,387 @@ stack:
     description: for static documentation and landing pages
 ---
 
+import { Image } from 'astro:assets';
+import homepageImage from '../../assets/images/flicktionary_home.png';
+
 <div class="project--big__text">
-**Flicktionary** API is a comprehensive, user-friendly online movie dictionary designed to provide film fans with detailed, easily accessible information about a diverse range of movies, including genres, directors, and descriptions.
+## Project Overview
 
-Built as a full-stack web application using **Node.js**, **Express**, and **MongoDB**, **Flicktionary** delivers a secure and interactive experience for exploring, searching, and curating favorite films.
+The **Flicktionary RESTful API** is the server-side backbone of my Flicktionary projects — a secure movie database that exposes structured JSON endpoints for films, genres, directors and users. It powers the Flicktionary React and Angular clients and can be used by any application that needs reliable movie data and user profiles.
 
-Users can register, log in, update their profiles, and manage their favorite movies, all protected by JWT authentication.
+{/* prettier-ignore */}
+<ul className='list-unstyled'>
+  <li><strong>Role:</strong> Solo backend developer</li>
+  <li><strong>Context:</strong> Course project focused on REST API design, security and database modeling</li>
+  <li><strong>Tech:</strong> Node.js, Express.js, MongoDB &amp; Mongoose, Passport.js (JWT &amp; local strategies), bcrypt, dotenv, morgan, body-parser, CORS, JSDoc</li>
+</ul>
 
-The API supports advanced search and filtering, and the backend is optimized for security, maintainability, and performance, ensuring a smooth user experience across all devices.
+The brief was to build a secure, well-documented RESTful API for a “movies” web application: support user registration and authentication, expose endpoints for movies and user data, and implement a favorites system. I treated it as a chance to practice real-world backend concerns like data modeling, validation, authentication and documentation.
+
+<details className='project__details'>
+  <summary><span className='open'>Read more about the brief and goals</span><span className='close'>Collapse brief and goals</span></summary>
+
+### The Challenge
+
+The assignment was to create the **server-side component** of a full-stack movie app. The API needed to:
+
+- store movies with structured information (title, description, genre, director, image, featured flag),
+- store users with secure credentials and lists of favorite movies,
+- allow users to register, log in, update their data and delete their account,
+- expose endpoints for querying movies, genres, directors and users,
+- protect most routes with JWT authentication,
+- and be accompanied by clear, navigable documentation.
+
+Beyond fulfilling the course requirements, I wanted the API to feel like something a front-end team could realistically use: predictable routes, consistent responses and thoughtful error handling.
+
+---
+
+### Objectives and Success Criteria
+
+I translated the brief into a few concrete goals:
+
+- **Model movies and users cleanly**  
+  Use MongoDB + Mongoose to define schemas with appropriate types and validation for movies and users.
+
+- **Implement secure authentication**  
+  Use Passport.js with JWT and local strategies, plus bcrypt for password hashing, to secure protected routes.
+
+- **Design clear, RESTful endpoints**  
+  Provide intuitive endpoints for movies, genres, directors and users, with sensible URL patterns and HTTP verbs.
+
+- **Support favorites and profile management**  
+  Enable users to add/remove favorite movies and update or delete their profile, with permission checks.
+
+- **Document the API for other developers**  
+  Use JSDoc to generate documentation that includes description, authentication rules, endpoints and error responses.
+
+I considered the project successful if someone could read the docs, obtain a token, and build a simple client that registers a user, fetches movies and manages favorites without needing to dig through the code.
+
+</details>
+
+---
+
+## Architecture Overview
+
+Flicktionary is a **Node.js + Express** API with a MongoDB backend and JWT-based authentication, wrapped in a small Express application that exposes RESTful routes for movies and users.
+
+<details className='project__details'>
+  <summary><span className='open'>Read architecture details</span><span className='close'>Collapse architecture details</span></summary>
+
+- **Express app structure**  
+  The main `index.js` file configures Express middleware (logging, JSON parsing, CORS, etc.), sets up routes for movies and users, and wires authentication via Passport.
+
+- **Data models (Mongoose)**  
+  `models.js` defines:
+
+  - a **Movie** schema with fields like `Title`, `Description`, `Genre`, `Director`, `ImagePath` and `Featured`,
+  - a **User** schema with `Username`, `Password`, `Email`, `Birthday` and `FavoriteMovies` (an array of ObjectIds referencing movies).  
+    Mongoose handles validation and maps these schemas to MongoDB collections.
+
+- **Authentication & authorization**  
+  `auth.js` and `passport.js` configure Passport for:
+
+  - local strategy (username/password) to issue JWTs on login,
+  - JWT strategy to protect routes.  
+    Tokens are passed in the `Authorization: Bearer <token>` header and checked for protected endpoints.
+
+- **Routing & controllers**  
+  Routes follow a REST style:
+
+  - `/movies`, `/movies/:Title`, `/movies/genre/:genreName`, `/movies/director/:directorName`,
+  - `/users`, `/users/:Username`, `/users/:Username/movies/:MovieID`.  
+    Each route handler encapsulates the logic for querying MongoDB, applying validation and sending structured JSON responses.
+
+- **Security & middleware**
+
+  - **bcrypt** for password hashing and verification,
+  - **CORS** to control cross-origin requests,
+  - basic security headers (e.g. `X-Content-Type-Options`, `X-Frame-Options`, `X-XSS-Protection`) applied via middleware,
+  - **morgan** for HTTP request logging,
+  - **dotenv** for environment-based configuration (port, DB URI, JWT secret).
+
+- **Documentation**  
+  JSDoc comments in the code are compiled into a static documentation page that describes endpoints, parameters, authentication requirements and example responses.
+
+</details>
+
+---
+
+## What the API does
+
+From a client developer’s point of view, Flicktionary provides:
+
+- **Movie endpoints**
+
+  - `GET /movies` – list of all movies (JWT required),
+  - `GET /movies/:Title` – data about a single movie,
+  - `GET /movies/genre/:genreName` – info about a genre,
+  - `GET /movies/director/:directorName` – info about a director.
+
+- **User endpoints**
+
+  - `POST /users` – register a new user (validation and hashing applied),
+  - `GET /users` – list all users (JWT required),
+  - `GET /users/:Username` – data about a single user,
+  - `PUT /users/:Username` – update user info (self-only),
+  - `DELETE /users/:Username` – delete a user account (self-only).
+
+- **Favorites endpoints**
+  - `POST /users/:Username/movies/:MovieID` – add a movie to favorites,
+  - `DELETE /users/:Username/movies/:MovieID` – remove a movie from favorites.
+
+Most endpoints require a valid JWT. Error responses are consistent, with status codes for validation errors (422), bad requests (400), missing resources (404) and server errors (500), making it easier for clients to react appropriately.
+
+<figure className='project__figure'>
+  <Image
+    src={homepageImage}
+    alt='Flicktionary home screen'
+    width={1020}
+    height={510}
+  />
+  <figcaption>
+    <h6>Home screen with movies list</h6>
+  </figcaption>
+</figure>
+
+## Implementation & Testing
+
+### Key implementation highlights
+
+{/* prettier-ignore */}
+<ul className='list-unstyled'>
+  <li><strong>Schema design:</strong> Used Mongoose models for movies and users, with embedded Genre and Director subdocuments for quick access on the movie resource.</li>
+  <li><strong>Secure auth flow:</strong> Implemented registration with validation and bcrypt hashing, plus login with Passport local strategy and JWT issuance.</li>
+  <li><strong>Protected routes:</strong> Guarded movie and user endpoints with Passport JWT strategy, ensuring only authenticated requests can access or modify data.</li>
+  <li><strong>Favorites logic:</strong> Added endpoints to manage a user’s <code>FavoriteMovies</code> array with permission checks (users can only change their own favorites).</li>
+  <li><strong>Error handling:</strong> Centralized error responses with clear messages and appropriate HTTP status codes.</li>
+  <li><strong>Documentation:</strong> Generated a JSDoc-based documentation site that mirrors the API contract, including example responses and authentication notes.</li>
+</ul>
+
+<details className='project__details'>
+  <summary><span className='open'>Read full implementation process</span><span className='close'>Collapse full implementation process</span></summary>
+
+### Phase 1 – Modeling movies and users
+
+I began by designing the data model:
+
+- a **Movie** schema with nested `Genre` and `Director` objects,
+- a **User** schema with credentials, basic profile info and an array of favorite movie IDs.
+
+I iterated on the schemas to strike a balance between denormalization (storing genre/director info with each movie) and simplicity for client consumption.
+
+**Key learning:** In document databases like MongoDB, it’s often worth embedding small, relatively static objects (like genre or director info) to reduce the number of queries the client depends on.
+
+---
+
+### Phase 2 – Building core endpoints
+
+Once the models were in place, I implemented the core routes:
+
+- `GET /movies` and `GET /movies/:Title` to retrieve movie data,
+- `GET /movies/genre/:genreName` and `GET /movies/director/:directorName` for lookup-style queries,
+- `GET /users` and `GET /users/:Username` for user data.
+
+This phase focused on getting the basic data flows working: querying MongoDB, shaping responses, and handling not-found and error cases.
+
+---
+
+### Phase 3 – Authentication and user management
+
+Next, I implemented user-focused features:
+
+- Registration via `POST /users` with validation rules:
+  - minimum lengths for `Username` and `Password`,
+  - strong password requirements,
+  - proper email format.
+- Password hashing using bcrypt before storing users.
+- Login endpoint that issues a JWT on successful credential verification.
+- `PUT /users/:Username` and `DELETE /users/:Username` with checks to ensure users can only modify or delete their own accounts.
+
+**Key learning:** Putting validation rules and clear error messages into the API itself reduces complexity for clients and helps prevent bad data from ever reaching the database.
+
+---
+
+### Phase 4 – Favorites and richer interactions
+
+With movies and users in place, I added favorites:
+
+- `POST /users/:Username/movies/:MovieID` to push a movie ID into `FavoriteMovies`,
+- `DELETE /users/:Username/movies/:MovieID` to remove it.
+
+Responses return the updated user document, which makes it easy for clients to update their local state.
+
+**Key learning:** Keeping favorites as IDs rather than full embedded movie documents keeps user documents lean and avoids duplication.
+
+---
+
+### Phase 5 – Security headers and documentation
+
+Finally, I improved robustness and usability:
+
+- Enabled and configured CORS so the API can be consumed by different clients,
+- Added basic security headers to reduce common attack surfaces,
+- Wrote JSDoc comments alongside the route handlers and generated an HTML documentation page with:
+  - descriptions,
+  - authentication requirements,
+  - request/response formats,
+  - example payloads and error codes.
+
+**Key learning:** Documentation is a feature. Having it auto-generated from the code reduces drift between implementation and docs.
+
+</details>
+
+### Testing strategy
+
+This project doesn’t yet have a full automated test suite, so I relied heavily on **structured manual testing** with tools like Postman, plus iterative checks during development.
+
+<details className='project__details'>
+  <summary><span className='open'>Read more about testing</span><span className='close'>Collapse testing details</span></summary>
+
+My testing strategy included:
+
+- **Endpoint-by-endpoint verification**
+
+  - Calling each route with valid data (e.g. `GET /movies`, `POST /users`, `POST /users/:Username/movies/:MovieID`) and confirming the response shape matches the documentation.
+  - Checking that authentication-protected routes return 401/403 when called without a token or with an invalid one.
+
+- **Validation and error states**
+
+  - Trying to register users with invalid data (short usernames, weak passwords, invalid email formats) to confirm the API returns 4xx errors with clear messages.
+  - Requesting non-existent movies or users to verify 404 responses.
+
+- **Permission checks**
+
+  - Attempting to update or delete a user via another user’s token to ensure the API denies the operation.
+  - Verifying that favorites endpoints only allow changes to the authenticated user’s own record.
+
+- **Integration-level checks with clients**
+  - Connecting the React and Angular clients to the API and running through typical flows (login, browse, favorite, update profile) to confirm the API behaves as expected under real usage.
+
+If I revisit this project, a clear next step is adding automated tests (for example, using a testing framework like Jest or Mocha with Supertest) to cover the most critical endpoints and error paths.
+
+</details>
+
+---
+
+<h2 className='sr-only'>UX & UI considerations</h2>
+<details className='project__details project__details--nointro'>
+  <summary><span className='open'>UX & UI considerations</span><span className='close'>Collapse UX & UI considerations</span></summary>
+
+### UX & UI considerations
+
+Even though this is a backend project, there is still “UX” in the way the API and its documentation are presented:
+
+- **Consistent route design**  
+  Routes follow a clear, resource-based structure (`/movies`, `/movies/:Title`, `/users/:Username`, `/users/:Username/movies/:MovieID`), which reduces cognitive load for client developers.
+
+- **Predictable responses**  
+  Successful responses are always JSON objects with stable keys; error responses include both a status code and a message, making them easier to handle in UIs.
+
+- **Readable documentation**  
+  The JSDoc-generated documentation page groups endpoints logically, includes example payloads and responses, and highlights authentication requirements near the top.
+
+- **Meaningful validation messages**  
+  Validation rules for registration and updates return explanations (e.g. why a password is rejected) rather than generic “Bad Request” messages, which improves the developer experience.
+
+- **Security information surfaced**  
+  Authentication and security considerations (JWT usage, headers, CORS) are explicit in the docs, so developers don’t have to guess at how to integrate safely.
+
+</details>
+
+---
+
+<h2 className='sr-only'>Results</h2>
+<details className='project__details project__details--nointro'>
+  <summary><span className='open'>Results</span><span className='close'>Collapse results</span></summary>
+
+### Results
+
+From a client developer’s perspective, the Flicktionary API provides:
+
+- a clear, documented way to fetch movies, genres and directors,
+- secure endpoints for registering users and managing their favorite movies,
+- and predictable error responses for handling validation and permission issues.
+
+From a learning perspective, this project helped me:
+
+- design and implement a RESTful API from scratch with Node, Express and MongoDB,
+- apply authentication and authorization using Passport and JWTs,
+- think through data modeling for movies and users,
+- and practice documenting an API in a way that other developers can realistically use.
+
+</details>
+
+---
+
+<h2 className='sr-only'>Limitations and Trade-offs</h2>
+<details className='project__details project__details--nointro'>
+  <summary><span className='open'>Limitations and Trade-offs</span><span className='close'>Collapse limitations and trade-offs</span></summary>
+
+### Limitations and Trade-offs
+
+Some current limitations and trade-offs:
+
+- **Single deployment & environment**  
+  The API targets a single production deployment; there’s no separate staging environment or multi-region setup.
+
+- **No rate limiting or advanced security hardening**  
+  Basic security headers and JWT auth are in place, but there is no rate limiting, IP blocking or advanced monitoring.
+
+- **Limited search capabilities**  
+  While endpoints support lookups by title, genre and director, there is no full-text search or flexible query language.
+
+- **No automated test suite (yet)**  
+  Testing is primarily manual; there are no automated regression tests for endpoints.
+
+- **No role-based access control**  
+  All authenticated users have the same role; there’s no distinction between normal users and admins.
+
+These trade-offs keep the project focused and manageable for a course setting, while still reflecting realistic backend concerns.
+
+</details>
+
+---
+
+<h2 className='sr-only'>Future Improvements & Roadmap</h2>
+<details className='project__details project__details--nointro'>
+  <summary><span className='open'>Future Improvements & Roadmap</span><span className='close'>Collapse future improvements</span></summary>
+
+### Future Improvements & Roadmap
+
+If I revisit Flicktionary API, some natural next steps would be:
+
+- **Automated testing**  
+  Add a test suite (e.g. Jest/Mocha + Supertest) to cover core endpoints, validation rules and permission checks.
+
+- **More flexible querying**  
+  Introduce more advanced filtering (e.g. query params for year, rating, runtime) or add text search capabilities.
+
+- **Role-based access control**  
+  Add admin roles for managing movies and possibly moderating user content.
+
+- **Rate limiting and monitoring**  
+  Implement request rate limiting and add logging/monitoring to better understand usage patterns and detect issues.
+
+- **API versioning**  
+  Introduce versioned endpoints (e.g. `/api/v1`) to support future changes without breaking existing clients.
+
+These aren’t features I’m actively building right now, but they outline a realistic path for evolving the API into a more production-ready backend.
+
+</details>
+
+---
+
+## What I learned
+
+Working on the Flicktionary RESTful API gave me a solid introduction to backend development:
+
+- Modeling data in MongoDB via Mongoose schemas,
+- Designing and implementing RESTful routes in Express,
+- Applying authentication and authorization with Passport and JWT,
+- Handling validation and error states in a way that’s friendly to client developers,
+- And documenting the API so other people (or future me) can integrate with it without guesswork.
+
+Overall, this project is a good representation of how I approach backend work as a junior developer: clear models, pragmatic security, honest documentation and an eye on how it will be used from the front end.
 
 </div>
