@@ -309,6 +309,18 @@ img {
 .main,
 .box--about {
   padding: calc(var(--modulo_base) * 3) calc(var(--modulo_base) * 1.2) 0;
+  aside {
+    font-size: var(--font-size--small);
+    line-height: 1.5;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+  ul {
+    padding-left: 1em;
+    li + li {
+      margin-top: 0.5em;
+    }
+  }
   @media (min-width: 768px) {
     padding: calc(var(--modulo_base) * 3);
   }
