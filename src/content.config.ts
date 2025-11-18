@@ -42,6 +42,7 @@ const projects = defineCollection({
           z.object({
             url: z.string(),
             text: z.string(),
+            description: z.string().optional(),
           })
         )
         .optional(),

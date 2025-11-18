@@ -61,7 +61,10 @@ const { title, shortDescription, description, pubDate, heroImage, gallery, links
 					{links && (
 							<p class="project--big__links">
 							{links.map((link) => (
-								<a href={link.url} class="project--big__link" target="_blank">{link.text}</a>
+								<>
+									<a href={link.url} class="project--big__link" target="_blank">{link.text}</a>
+									{link.description && <small>{link.description}</small>}
+								</>
 							))}
 						</p>
 					)}

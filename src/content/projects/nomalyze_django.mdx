@@ -24,8 +24,10 @@ gallery:
 links:
   - url: 'https://github.com/nicovece/cf-recipe-app'
     text: 'Github repository'
+    description: ''
   - url: 'https://cf-recipe-app.onrender.com/'
     text: 'Live website'
+    description: 'Use demo account: demo, example123'
 niceName: 'nomalyze-django'
 stack:
   - name: Python
@@ -49,6 +51,10 @@ stack:
     description: developer experience
 ---
 
+import { Image } from 'astro:assets';
+import homepageImage from '../../assets/images/nomalyze_django-homepage.png';
+import dataVisualizationImage from '../../assets/images/nomalyze_django-data_visualization.png';
+
 <div class="project--big__text">
 ## Project Overview
 
@@ -63,65 +69,10 @@ stack:
 
 The brief was to build a recipe app with Django, including basic CRUD, a computed “difficulty” value, and some form of analytics. I treated it as a chance to practice real-world full-stack concerns: data modeling, business logic, and deployment.
 
----
-
-## What the app does
-
-From a user’s point of view, Nomalyze lets you:
-
-- Add, edit, and delete recipes in a simple interface
-- See each recipe’s difficulty (Easy, Medium, Intermediate, Hard)
-- Search and filter recipes by name, ingredients, max cooking time, and difficulty — including partial and wildcard matches (e.g. “Pasta al” also finds “Pasta al Pesto” and “Pasta all’Amatriciana”)
-- View basic analytics, such as difficulty distribution and common ingredients
-
-The difficulty calculation is intentionally simple and primarily serves as a learning exercise. It uses measurable fields (time and ingredients) to assign a label. It’s not intended to fully capture how professional cooks judge a recipe, but it shows how to turn a fuzzy idea into consistent, explainable code.
-
----
-
-## Key implementation highlights
-
-{/* prettier-ignore */}
-<ul className='list-unstyled'>
-  <li><strong>Data model & CRUD:</strong> Designed Django models for recipes and
-    built standard CRUD views with templates, focusing on clear forms and
-    navigation.</li>
-  <li><strong>Difficulty logic:</strong> Encapsulated the difficulty rules in
-    Python so labels update automatically when a recipe is saved.</li>
-  <li><strong>Search & filters:</strong> Implemented combined filters (e.g. by
-    difficulty) and partial search queries using Django’s querying tools.</li>
-  <li><strong>Analytics:</strong> Pulled data into Pandas, aggregated it, and
-    rendered Matplotlib charts inside Django templates.</li>
-  <li><strong>Deployment:</strong> Configured separate dev/production settings,
-    used SQLite locally and PostgreSQL on Render, managed environment variables,
-    and set up static file handling.</li>
-</ul>
-
----
-
-## What I learned
-
-Nomalyze gave me an end-to-end experience of building and shipping a Django app:
-
-- Translating a written brief into a data model and UI,
-- Expressing business rules as concrete, testable logic,
-- Integrating Python’s data stack into a web application,
-- Handling real deployment details like environment variables, production databases, and static assets.
-
----
-
-It’s a course-based project, but it reflects how I approach full-stack work: clear requirements, pragmatic implementation, and an honest view of limitations and possible next steps.
-
----
-
-{/* <div class="project--big__text"> */}
-
-</div>
 <details className='project__details'>
-  <summary><span className='open'>Read full case study</span><span className='close'>Collapse full case study</span></summary>
+  <summary><span className='open'>Read more about the brief and goals</span><span className='close'>Collapse brief and goals</span></summary>
 
-<div className='project--big__info'>
-<div className='project--big__info_detail'>
-## The Challenge
+### The Challenge
 
 The course brief asked for a Django-based recipe application where users could manage their own collection of dishes. Beyond simply storing recipes, the specification also introduced the idea of calculating how “difficult” a recipe is, and surfacing some basic statistics about the overall collection.
 
@@ -137,7 +88,7 @@ Nomalyze is the resulting app: a personal recipe manager that not only stores re
 
 ---
 
-## Objectives and Success Criteria
+### Objectives and Success Criteria
 
 Within the provided brief, I defined a few concrete goals for myself:
 
@@ -160,9 +111,92 @@ I considered the project successful if:
 - The analytics view offered a quick, visual overview instead of just another list of records.
 - I could clearly explain the technical and design decisions behind the app to both non-technical reviewers and developers.
 
+</details>
+
+{/* prettier-ignore */}
+{/* ## Success Criteria
+
+For this project, “good” looked like:
+
+- Nomalyze deployed and accessible online with a stable PostgreSQL database.
+- Difficulty labels that feel intuitive for typical home-cooking recipes.
+- An analytics view that gives a quick visual overview instead of just another list of records.
+- A codebase and UI that I can walk through clearly with both non-technical reviewers and developers.
+
 ---
 
-## Process
+## Architecture Overview
+
+Nomalyze follows a classic Django structure:
+
+- **Model–View–Template (MVT):** browser requests are routed to Django views, which use the ORM to read and write `Recipe` data and render HTML templates with the resulting context.
+- **Data layer:** recipes are stored in a relational database (SQLite in development, PostgreSQL in production). Each recipe records fields such as name, cooking time, ingredients and reference links, which makes querying and analytics straightforward.
+- **Difficulty & analytics flow:** the difficulty level (Easy, Medium, Intermediate, Hard) is computed in Python based on cooking time and number of ingredients. For analytics, a dedicated view pulls data into Pandas, runs aggregations (e.g. difficulty distribution, ingredient frequency), and uses Matplotlib to generate charts that are embedded back into Django templates.
+- **Frontend & assets:** the UI is built with Django templates styled via Tailwind CSS. Static assets are served in production with WhiteNoise to keep deployment simple.
+- **Deployment:** the app runs on Render, using environment variables and `dj-database-url` for environment-based configuration, with Gunicorn as the WSGI server.
+
+--- \*/}
+
+## Architecture Overview
+
+Nomalyze is a classic Django app: a recipes data model, Django views and templates, plus a small analytics pipeline using Pandas and Matplotlib.
+
+<details className='project__details'>
+  <summary><span className='open'>Read architecture details</span><span className='close'>Collapse architecture details</span></summary>
+
+- **Model–View–Template (MVT):** browser requests are routed to Django views, which use the ORM to read and write `Recipe` data and render HTML templates with the resulting context.
+- **Data layer:** recipes are stored in a relational database (SQLite in development, PostgreSQL in production). Each recipe records fields such as name, cooking time, ingredients and reference links, which makes querying and analytics straightforward.
+- **Difficulty & analytics flow:** the difficulty level (Easy, Medium, Intermediate, Hard) is computed in Python based on cooking time and number of ingredients. For analytics, a dedicated view pulls data into Pandas, runs aggregations (e.g. difficulty distribution, ingredient frequency), and uses Matplotlib to generate charts that are embedded back into Django templates.
+- **Frontend & assets:** the UI is built with Django templates styled via Tailwind CSS. Static assets are served in production with WhiteNoise to keep deployment simple.
+- **Deployment:** the app runs on Render, using environment variables and `dj-database-url` for environment-based configuration, with Gunicorn as the WSGI server.
+
+</details>
+
+## What the app does
+
+From a user’s point of view, Nomalyze lets you:
+
+- Add, edit, and delete recipes in a simple interface
+- See each recipe’s difficulty (Easy, Medium, Intermediate, Hard)
+- Search and filter recipes by name, ingredients, max cooking time, and difficulty — including partial and wildcard matches (e.g. “Pasta al” also finds “Pasta al Pesto” and “Pasta all’Amatriciana”)
+- View basic analytics, such as difficulty distribution and common ingredients
+
+The difficulty calculation is intentionally simple and primarily serves as a learning exercise. It uses measurable fields (time and ingredients) to assign a label. It’s not intended to fully capture how professional cooks judge a recipe, but it shows how to turn a fuzzy idea into consistent, explainable code.
+
+<figure className='project__figure'>
+  <Image
+    src={homepageImage}
+    alt='Nomalyze home screen'
+    width={1020}
+    height={510}
+  />
+  <figcaption>
+    <h6>Home screen with quick access to recipes and analytics.</h6>
+  </figcaption>
+</figure>
+
+## Implementation & Testing
+
+### Key implementation highlights
+
+{/* prettier-ignore */}
+<ul className='list-unstyled'>
+  <li><strong>Data model & CRUD:</strong> Designed Django models for recipes and
+    built standard CRUD views with templates, focusing on clear forms and
+    navigation.</li>
+  <li><strong>Difficulty logic:</strong> Encapsulated the difficulty rules in
+    Python so labels update automatically when a recipe is saved.</li>
+  <li><strong>Search & filters:</strong> Implemented combined filters (e.g. by
+    difficulty) and partial search queries using Django’s querying tools.</li>
+  <li><strong>Analytics:</strong> Pulled data into Pandas, aggregated it, and
+    rendered Matplotlib charts inside Django templates.</li>
+  <li><strong>Deployment:</strong> Configured separate dev/production settings,
+    used SQLite locally and PostgreSQL on Render, managed environment variables,
+    and set up static file handling.</li>
+</ul>
+
+<details className='project__details'>
+  <summary><span className='open'>Read full implementation process</span><span className='close'>Collapse full implementation process</span></summary>
 
 ### Phase 1 – Understanding the brief and designing the data model
 
@@ -260,10 +294,69 @@ Learning to work with environment-based configuration and a production database 
 
 **Key learning:** Deployment forces you to think like a real-world developer: not just “does it work on my machine?” but “is this secure, configurable, and reliable in production?”
 
+</details>
+
+### Testing strategy
+
+Nomalyze includes an automated test suite built with Django’s `TestCase` framework, plus manual browser testing for the main user flows.
+
+<details className='project__details'>
+  <summary><span className='open'>Read more about testing</span><span className='close'>Collapse testing details</span></summary>
+
+- **Automated tests:**
+
+  - `src/recipes/tests.py` covers the core of the app:
+    - models (validation, difficulty calculation, ingredient parsing)
+    - views (home, list, detail, search)
+    - forms (search form validation)
+    - URLs and templates
+    - chart utilities and wildcard search behaviour
+    - basic admin configuration
+  - `src/recipe_project/test_auth.py` focuses on authentication flows, including login/logout views and session handling.
+  - In total, 101 tests run successfully (as recorded in `test_results.txt`), all passing in about 9 seconds.
+  - Tests are executed via `python src/manage.py test`.
+
+- **Manual testing:**  
+  In addition to automated tests, I manually exercised the main user flows in the browser (creating, editing and deleting recipes; running different search/filter combinations; and generating analytics) to confirm that the behaviour matched expectations from a user’s point of view.
+
+If I revisit the project, a natural next step would be to expand the automated tests around edge cases in the difficulty algorithm and more complex search/filter combinations, as well as adding regression tests for any new features.
+
+</details>
+
+<figure className='project__figure'>
+  <Image
+    src={dataVisualizationImage}
+    alt='Data visualization'
+    width={1020}
+    height={510}
+  />
+  <figcaption>
+    <h6>Data visualization</h6>
+  </figcaption>
+</figure>
+
+<h2 className='sr-only'>UX & UI considerations</h2>
+<details className='project__details project__details--nointro'>
+  <summary><span className='open'>UX & UI considerations</span><span className='close'>Collapse UX & UI considerations</span></summary>
+### UX & UI considerations
+This project was primarily focused on backend, data and deployment, but my design background still influenced how I structured the interface.
+
+A few examples:
+
+- **Recipe form layout:** I grouped related fields (title, times, ingredients, steps) and ordered them from most to least important. This helps the form feel less overwhelming, even though it collects quite a lot of information.
+- **Search & analyze screen:** I separated search criteria (name, ingredients, max cooking time, difficulty) from the “Search Tips” so users can discover wildcard and partial matching without cluttering the main controls. The primary button clearly communicates “Search & Analyze”.
+- **Consistent patterns:** I reused the same basic layout and visual language across the home page, recipes list, detail view and analytics so the app feels coherent and predictable.
+- **Content-first styling:** I kept the visual design simple and restrained, using Tailwind CSS mostly to support hierarchy and readability rather than heavy decoration. The focus stays on recipes, difficulty labels and charts.
+
+</details>
+
 ---
 
-## Results
+<h2 className='sr-only'>Results</h2>
 
+<details className='project__details project__details--nointro'>
+  <summary><span className='open'>Results</span><span className='close'>Collapse results</span></summary>
+### Results
 From a user’s perspective, Nomalyze provides:
 
 - a simple way to store and manage a personal recipe collection,
@@ -279,9 +372,14 @@ From a learning perspective, this project helped me:
 
 My mentor’s feedback highlighted that I went beyond the minimum requirements of the course brief, especially around implementation quality and the completeness of the deployed solution, which confirmed that I was on the right track in treating this as a realistic full-stack exercise rather than just a coding assignment.
 
+</details>
+
 ---
 
-## Limitations and Trade-offs
+<h2 className='sr-only'>Limitations and Trade-offs</h2>
+<details className='project__details project__details--nointro'>
+  <summary><span className='open'>Limitations and Trade-offs</span><span className='close'>Collapse limitations and trade-offs</span></summary>
+### Limitations and Trade-offs
 
 Even though the project met the course requirements, there are some clear limitations:
 
@@ -291,9 +389,15 @@ Even though the project met the course requirements, there are some clear limita
 
 Being explicit about these trade-offs helps me keep a realistic view of what Nomalyze is: a solid, course-based full-stack project with room to grow, not a finished commercial product.
 
+</details>
+
 ---
 
-## Potential Future Improvements
+<h2 className='sr-only'>Future Improvements & Roadmap</h2>
+
+<details className='project__details project__details--nointro'>
+  <summary><span className='open'>Future Improvements & Roadmap</span><span className='close'>Collapse future improvements</span></summary>
+### Future Improvements & Roadmap
 
 If I decide to revisit Nomalyze in the future, some natural extensions would be:
 
@@ -311,6 +415,21 @@ If I decide to revisit Nomalyze in the future, some natural extensions would be:
 
 These are not features I am actively working on right now, but they represent clear next steps if I choose to evolve the project further or revisit it to practice more advanced topics.
 
-</div>
-</div>
 </details>
+
+---
+
+## What I learned
+
+Nomalyze gave me an end-to-end experience of building and shipping a Django app:
+
+- Translating a written brief into a data model and UI,
+- Expressing business rules as concrete, testable logic,
+- Integrating Python’s data stack into a web application,
+- Handling real deployment details like environment variables, production databases, and static assets.
+
+---
+
+It’s a course-based project, but it reflects how I approach full-stack work: clear requirements, pragmatic implementation, and an honest view of limitations and possible next steps.
+
+</div>
