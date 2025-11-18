@@ -11,6 +11,15 @@ const today = new Date();
 						<a href="https://instagram.com/nicovece">instagram</a>
 						<a href="https://mastodon.social/@nicovece">mastodon</a>
 		</div>
+		<details>
+			<summary>Impressum</summary>
+			<p>Responsible for the content of this website:</p>
+			<p>Nicola Vece<br/>
+				Nüßlerstraße 44<br/>
+				13088 Berlin<br/>
+				Germany</p>
+			<p>me@nicovece.com</p>
+		</details>
 	</section>
 	<!-- &copy; {today.getFullYear()} Your name here. All rights reserved. -->
 	<!-- <div class="social-links">
@@ -51,19 +60,61 @@ const today = new Date();
 </footer>
 <style lang="scss">
 	.byebye {
-		display: flex;
-		flex-direction: column;
+		// display: flex;
+		// flex-direction: column;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
 		justify-content: space-between;
 		align-items: start;
 		gap: 1em;
+		font-size: 1rem;
 		@media (min-width: 768px) {
-			flex-direction: row;
+			// flex-direction: row;
+		}
+		details {
+			align-self: center;
+			justify-self: end;
+			grid-column: 2;
+			font-size: var(--font-size--base);
+			&::details-content {
+				height: auto;
+				overflow: clip;
+				opacity: 0;
+				content-visibility: hidden;
+				transition:
+        height 0.25s ease,
+        opacity 0.5s ease,
+        content-visibility 0.5s ease allow-discrete;
+			}
+			&[open] {
+				&::details-content {
+					height: auto;
+					opacity: 1;
+					content-visibility: visible;
+				}
+			}
+			p, summary {
+				font-size: inherit;
+			}
+			summary {
+				font-weight: var(--font__weight--bold);
+				// color: var(--color--medium);
+				cursor: pointer;
+				list-style: none;
+				text-align: right;
+			}
+			summary + p {
+				margin-top: 0.5em;
+				padding-top: 0.5em;
+				border-top: 1px solid lightgray;
+			}
 		}
 	}
 	.social-links {
 		display: flex;
 		flex-direction: column;
 		justify-content: start;
+		justify-self: end;
 		gap: 1em;
 		margin-top: 0.5em;
 		@media (min-width: 768px) {
