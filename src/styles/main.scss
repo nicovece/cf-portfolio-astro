@@ -1,5 +1,9 @@
 @use 'variables' as v;
 @use '_modern-normalize';
+:root {
+  interpolate-size: allow-keywords;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -545,6 +549,16 @@ img {
     padding: calc(0.4 * var(--modulo_base)) var(--modulo_base)
       var(--modulo_base) var(--modulo_base);
     transition: all 0.1s ease;
+    &::details-content {
+      transition:
+        height 0.25s ease,
+        opacity 0.5s ease,
+        content-visibility 0.5s ease allow-discrete;
+      height: auto;
+      overflow: clip;
+      opacity: 0;
+      content-visibility: hidden;
+    }
     summary {
       width: fit-content;
       display: flex;
@@ -608,6 +622,11 @@ img {
     }
     &[open] {
       background-color: var(--color_nu--background--light);
+      &::details-content {
+        height: auto;
+        opacity: 1;
+        content-visibility: visible;
+      }
       &.project__details--nointro {
         &::after {
           background-color: transparent;
