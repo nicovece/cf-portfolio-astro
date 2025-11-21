@@ -1,6 +1,14 @@
 ---
 import Layout from '../layouts/BasePage.astro';
 import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
+import { getEntry } from 'astro:content';
+import { render } from 'astro:content';
+
+const aboutEntry = await getEntry('about', 'index');
+if (!aboutEntry) {
+	throw new Error('About content entry not found');
+}
+const { Content } = await render(aboutEntry);
 ---
 
 <Layout
@@ -9,29 +17,34 @@ import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
 	pubDate={new Date('August 08 2021')}
 	heroImage={AboutHeroImage}
 >
-<div class="main main--flattop">
-	<h3>Ciao, io sono Nico.</h3>
-	<p>
-			I had design training but learned development on my own. The topics are becoming more interesting yet
-			increasingly complicated to study independently.
-	</p>
-	<p>
-			I remain committed to expanding my expertise to serve others better through a Full-Stack developer
-			course.
-	</p>
-	<p>
-			My career has been a proud journey of continuous growth. After gaining design knowledge at university, I
-			found a mentor who guided my training as a graphic designer. During this period, I developed a passion
-			for web development.
-	</p>
-	<p>
-			After three years, my mentor invited me to partner in his firm, where I managed the web and digital
-			department, gaining expertise in both design and development.
-	</p>
-	<p>å
-			In 2012, I left the partnership to freelance as a consultant, and I'm pleased that many collaborations
-			have continued since then, significantly enhancing my development skills through diverse projects.
-	</p>
-	<a href="files/nico_vece-curriculum.pdf" class="text_link" download=""><strong>Download my CV</strong></a>
+<div class="main main--dett">
+	<h1 class="page__title--big"><strong>Nico Vece</strong></h1>
+</div>
+<div class="main main--flattop main--about">
+	<h1>
+	My full name is Nicola, but only my mom (when she's mad at me) and the tax office call me that, so let's stick with Nico. This page is about some of the things I'm proud of and love most.</h1>
+	<h1 class="margin-top">
+		<span>If you're in a hurry, here’s the TL;DR:</span>
+		<span class="hide-on-mobile">
+			download my <a href="/cf-portfolio-astro/files/nico_vece-curriculum.pdf" class="link--intext">resume</a>, browse my <a href="/cf-portfolio-astro/projects" class="link--intext">projects</a>,
+			<a href="/cf-portfolio-astro/contact" class="link--intext">get in touch</a>.
+		</span>
+		<span class="show-on-mobile">
+			<a href="/cf-portfolio-astro/files/nico_vece-curriculum.pdf" class="link--intext">resume</a>
+			<a href="/cf-portfolio-astro/projects" class="link--intext">projects</a>
+			<a href="/cf-portfolio-astro/contact" class="link--intext">get in touch</a>
+		</span>
+	</h1>
 	</div>
+	<section id="about-me" class="main main--flat-top box--about bg--dark">
+		<div class="box--about__left">	
+			<img class="mugshot" src={`${import.meta.env.BASE_URL}images/nico_vece.jpg`} alt="Nico" />
+		</div>
+		<div class="box--about__right">
+<h4>About me</h4>
+
+<Content />
+
+</div>
+</section>
 </Layout>

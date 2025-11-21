@@ -9,18 +9,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style lang="scss">
-			.mugshot {
-				width: 100%;
-				max-width: 375px;
-				height: auto;
-				border-radius: 50%;
-				object-fit: cover;
-				@media (min-width: 1024px) {
-					max-width: 100%;
-				}
-			}
-		</style>
 	</head>
 	<body>
 		<Header />
@@ -53,7 +41,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 					<!-- <a href="https://twitter.com/nicovece">twitter</a> -->
 				</h1>
 				<h1 class="margin-top">
-					<span>Feel free to poke around my <a href={`${import.meta.env.BASE_URL}projects`} class="link--intext">projects</a> or get to know me a bit better by <a href={`${import.meta.env.BASE_URL}#about-me`} class="link--intext">scrolling down</a></span>
+					<span>Feel free to poke around my <a href={`${import.meta.env.BASE_URL}projects`} class="link--intext">projects</a> or get to know me a bit better <a href={`${import.meta.env.BASE_URL}about`} class="link--intext">over here</a>.</span>
 				</h1>
 			</div>
 		</section>
@@ -64,35 +52,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				<div class="box--about__right">
 
 	<h4><strong>Nico Vece</strong></h4>
-	<aside>
-		My full name is Nicola, but only my mom (when she's mad at me) and the tax office call me that, so let's stick with Nico.
-	</aside>
-	<h4>About me</h4>
-
-  <p><strong>Digital product designer &amp; front-end developer with 20 years of experience, now transitioning into full-stack web development.</strong></p>
-
-  <p>
-    I design and build digital products end to end—where design, functionality, and code have to align and ship reliably.
-    In 2025, I completed an intensive 8-month full-stack program (Jan–Oct) and added hands-on work with modern JavaScript frameworks,
-    backend development, APIs, testing practices, and databases. I learn fast, take ownership, and focus on production-ready results.
-  </p>
-
-  <p>
-    <strong>What I bring:</strong> professional maturity, a strong product mindset, and deep front-end fundamentals.
-    I’m looking for a permanent full-stack role in Berlin (junior to mid-level), ideally on teams building modern web or AI/agentic products.
-  </p>
-
-  <h4>Tech snapshot</h4>
-  <ul>
-    <li><strong>Strong:</strong> HTML5, CSS3, modern JavaScript (frontend), responsive UI implementation, component-based thinking</li>
-    <li><strong>Currently working with:</strong> React, Angular, TypeScript, Node.js, Express, Python, Django, RESTful APIs, PostgreSQL &amp; SQLite (via ORMs), MongoDB, automated testing practices (Jest, Cucumber, Puppeteer)</li>
-    <li><strong>Background / legacy:</strong> jQuery, PHP/WordPress, Bootstrap (legacy v3), Firebase, React Native (exposure)</li>
-  </ul>
-
-  <p class="about-cta" style="margin-top:1rem;">
-    Open to a full-stack role in Berlin (hybrid/remote welcome) where I can contribute immediately on the frontend while deepening backend expertise and working on modern web or AI-driven products.
-  </p>
-	<a href="files/nico_vece-curriculum.pdf" class="text_link text_link--on_dark" download><strong>Download my CV</strong></a>
+	<p>I’m Nico, a full-stack web developer with a long background in digital product design and front-end development, based in Berlin.</p>
+	<p>Over the past 20 years I’ve been designing and building websites and web apps, and I’ve recently completed an intensive full-stack program focused on React, Angular, TypeScript, Node.js/Express, Python/Django, REST APIs, and SQL/NoSQL databases.</p>
+	<p>I like working end-to-end: from user flows and UI to accessible, production-ready frontends and pragmatic backends. Right now I’m looking for a junior to mid-level full-stack or front-end web developer role in Berlin (hybrid or remote), where I can contribute immediately on the frontend while continuing to grow my backend skills.</p>
+	<p>If the smile worked, you can get the full story on my <a href="about" class="link--intext link--intext--on_dark">About me</a> page. If you’d rather look at cold, hard facts, you can download my <a href="files/Nicola-Vece-Full-Stack-Developer-Resume-2025.pdf" class="link--intext link--intext--on_dark" download><strong>resume</strong></a></p>
 
 </div>
 		</section>
