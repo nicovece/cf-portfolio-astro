@@ -13,13 +13,14 @@
   --color--dark: rgb(41, 43, 46);
   --color--darker: rgb(13, 17, 23);
   --color--medium: rgb(130, 130, 130);
+  --color--medium-light: #{lighten(rgb(130, 130, 130), 20%)};
   --color--lightest: white;
 
   --color_nu--primary: #ea514e;
   --color_nu--primary-dark: #e32c26;
   --color_nu--primary-text: #2f1010;
   --color_nu--primary-text-medium: #5e201f;
-
+  --color_nu--primary-text-medium-light: #{lighten(#5e201f, 20%)};
   --color_nu--background--light: #f9f9f9;
 
   // --font-size--big: 1.6rem;

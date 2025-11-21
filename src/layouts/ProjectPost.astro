@@ -10,7 +10,7 @@ import BlogPostNavPrevNext from '../components/BlogPostNavPrevNext.astro';
 
 type Props = CollectionEntry<'projects'>['data'];
 
-const { title, shortDescription, description, pubDate, heroImage, gallery, links, stack, niceName } = Astro.props;
+const { title, shortDescription, description, pubDate, heroImage, gallery, links, stack, niceName, tags } = Astro.props;
 ---
 
 <html lang="en">
@@ -58,6 +58,13 @@ const { title, shortDescription, description, pubDate, heroImage, gallery, links
 					<h4 class="project--big__title">
 						<strong>{title}</strong><span> - </span>{shortDescription}
 					</h4>
+					{tags && (
+						<ul class="project__tags">
+							{tags.map((tag) => (
+								<li><span class="project__item__tag">{tag}</span></li>
+							))}
+						</ul>
+					)}
 					{links && (
 							<p class="project--big__links">
 							{links.map((link) => (
