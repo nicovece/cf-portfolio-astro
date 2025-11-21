@@ -1008,6 +1008,35 @@ img {
       calc(var(--modulo_base) / 2);
   }
 }
+
+.project__item__tags,
+.project__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 1rem 0 2rem 0;
+  list-style: none;
+  padding-left: 0;
+  font-size: var(--font-size--base);
+  color: var(--color--medium-light);
+  li {
+    display: inline-block;
+    &::before {
+      content: '•';
+      margin-right: 0.25em;
+      color: var(--color--medium-light);
+    }
+    &:first-child {
+      &::before {
+        content: none;
+      }
+    }
+  }
+}
+.project__tags {
+  margin: 1.5rem 0 3rem 0;
+  color: var(--color--medium);
+}
 .btn--back {
   margin-top: 0;
   margin-left: 0;

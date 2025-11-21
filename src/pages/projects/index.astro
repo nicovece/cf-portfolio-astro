@@ -11,6 +11,19 @@ import { marked } from 'marked';
 const projects = (await getCollection('projects')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+// Helper function to strip outer <p> tags from parsed markdown
+function stripParagraphTags(html: string): string {
+	// Remove leading <p> and trailing </p> with any whitespace/newlines
+	return html.replace(/^\s*<p>|<\/p>\s*$/g, '').trim();
+}
+
+// Helper function to parse markdown and strip paragraph tags
+function parseMarkdown(markdown: string): string {
+	const parsed = marked.parse(markdown) as string;
+	// Strip outer <p> tags and any trailing whitespace/newlines
+	return stripParagraphTags(parsed);
+}
 ---
 
 <!doctype html>
@@ -40,7 +53,14 @@ const projects = (await getCollection('projects')).sort(
 						</h6>
 					</a>
 					<div class="project__item__description">
-						<p set:html={marked.parse(project.data.description)} />
+						<p set:html={parseMarkdown(project.data.description)} />
+						{project.data.tags && (
+								<ul class="project__item__tags">
+									{project.data.tags.map((tag) => (
+										<li><span class="project__item__tag">{tag}</span></li>
+									))}
+								</ul>
+							)}
 						<a href={`${import.meta.env.BASE_URL}projects/${project.id}/`} class="text_link text_link--on_dark"><strong>Read more</strong></a>
 					</div>
 				</div>
