@@ -3,6 +3,12 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from 'astro:content';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const projects = (await getCollection('projects'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 6); // Show up to 6 most recent projects on homepage
 ---
 
 <!doctype html>
@@ -45,7 +51,20 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				</h1>
 			</div>
 		</section>
-		<section id="about-me" class="box--about bg--dark">
+		<section  class="main main--flat-top bg--dark main--home__projects">
+			<div class="main main--short">
+				<h4 class="main--home__projects__title">Recent projects</h4>
+			</div>
+			<div id="projects">
+				{projects.map((project) => (
+					<ProjectCard project={project} variant="preview" />
+				))}
+			</div>
+			<div class="main main--short--bottom">
+				<a href={`${import.meta.env.BASE_URL}projects`} class="link--intext link--intext--on_dark">View all projects</a>
+			</div>
+		</section>
+		<section id="about-me" class="box--about bg--darker">
 				<div class="box--about__left">	
 					<img class="mugshot" src={`${import.meta.env.BASE_URL}images/nico_vece.jpg`} alt="Nico" />
 				</div>

@@ -4,26 +4,11 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
-import { Image } from 'astro:assets';
-import { marked } from 'marked';
+import ProjectCard from '../../components/ProjectCard.astro';
 
 const projects = (await getCollection('projects')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-
-// Helper function to strip outer <p> tags from parsed markdown
-function stripParagraphTags(html: string): string {
-	// Remove leading <p> and trailing </p> with any whitespace/newlines
-	return html.replace(/^\s*<p>|<\/p>\s*$/g, '').trim();
-}
-
-// Helper function to parse markdown and strip paragraph tags
-function parseMarkdown(markdown: string): string {
-	const parsed = marked.parse(markdown) as string;
-	// Strip outer <p> tags and any trailing whitespace/newlines
-	return stripParagraphTags(parsed);
-}
 ---
 
 <!doctype html>
@@ -34,39 +19,9 @@ function parseMarkdown(markdown: string): string {
 	<body>
 		<Header />
 		<main>
-					{
-						projects.map((project) => (
-							<section class="project--big project--big--semitop renzopianog124">
-				<div class="project--big__header">
-					<h4>
-							<a class="text_link text_link--fwnormal project--big__title" href={`${import.meta.env.BASE_URL}projects/${project.id}/`}><strong>{project.data.title}</strong><span> - </span>{project.data.shortDescription}</a>
-					</h4>
-				</div>
-				<div class={`project__items ${project.data.niceName}`}>
-					<a class="two--l" href={`${import.meta.env.BASE_URL}projects/${project.id}/`}>
-						{/* <img src="https://nicovece.s3.eu-central-1.amazonaws.com/assets/images/ws_digital/g124/g124_thumb.jpg" alt="renzopianog124.com homepage screenshot" class=" lazyloaded"> */}
-						{project.data.heroImage && (
-										<Image width={720} height={360} src={project.data.heroImage} alt="" />
-									)}
-						<h6 class="lg-only">
-							{project.data.title} <span>{project.data.pubDate.getFullYear()}</span>
-						</h6>
-					</a>
-					<div class="project__item__description">
-						<p set:html={parseMarkdown(project.data.description)} />
-						{project.data.tags && (
-								<ul class="project__item__tags">
-									{project.data.tags.map((tag) => (
-										<li><span class="project__item__tag">{tag}</span></li>
-									))}
-								</ul>
-							)}
-						<a href={`${import.meta.env.BASE_URL}projects/${project.id}/`} class="text_link text_link--on_dark"><strong>Read more</strong></a>
-					</div>
-				</div>
-			</section>
-						))
-					}
+			{projects.map((project) => (
+				<ProjectCard project={project} variant="full" />
+			))}
 		</main>
 		<Footer />
 	</body>
