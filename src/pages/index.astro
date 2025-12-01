@@ -19,11 +19,10 @@ const projects = (await getCollection('projects'))
 	<body>
 		<Header />
 		<section id="home_intro" class="main main--home">
-					
-				<div class="main--home__content">
-					<h3 class="main--home__intro">
-						I swear that one day my portfolio will be online, maybe.
-					</h3>
+			<div class="main--home__content">
+				<p class="main--home__intro tagline">
+					I swear that one day my portfolio will be online, maybe.
+				</p>
 				<h1>
 					<span><strong>Ciao, io sono Nico</strong>.</span> I'm an
 					italian designer and fullstack developer living in Berlin,
@@ -46,14 +45,14 @@ const projects = (await getCollection('projects'))
 					<!-- <a href="https://www.flickr.com/photos/lightsumo/">flickr</a> -->
 					<!-- <a href="https://twitter.com/nicovece">twitter</a> -->
 				</h1>
-				<h1 class="margin-top">
+				<h2 class="margin-top">
 					<span>Feel free to poke around my <a href={`${import.meta.env.BASE_URL}projects`} class="link--intext">projects</a> or get to know me a bit better <a href={`${import.meta.env.BASE_URL}about`} class="link--intext">over here</a>.</span>
-				</h1>
+				</h2>
 			</div>
 		</section>
 		<section  class="main main--flat-top bg--dark main--home__projects">
 			<div class="main main--short">
-				<h4 class="main--home__projects__title">Recent projects</h4>
+				<h3 class="main--home__projects__title">Recent projects</h3>
 			</div>
 			<div id="projects">
 				{projects.map((project) => (
@@ -65,18 +64,16 @@ const projects = (await getCollection('projects'))
 			</div>
 		</section>
 		<section id="about-me" class="box--about bg--darker">
-				<div class="box--about__left">	
-					<img class="mugshot" src={`${import.meta.env.BASE_URL}images/nico_vece.jpg`} alt="Nico" />
-				</div>
-				<div class="box--about__right">
-
-	<h4><strong>Nico Vece</strong></h4>
-	<p>I’m Nico, a full-stack web developer with a long background in digital product design and front-end development, based in Berlin.</p>
-	<p>Over the past 20 years I’ve been designing and building websites and web apps, and I’ve recently completed an intensive full-stack program focused on React, Angular, TypeScript, Node.js/Express, Python/Django, REST APIs, and SQL/NoSQL databases.</p>
-	<p>I like working end-to-end: from user flows and UI to accessible, production-ready frontends and pragmatic backends. Right now I’m looking for a junior to mid-level full-stack or front-end web developer role in Berlin (hybrid or remote), where I can contribute immediately on the frontend while continuing to grow my backend skills.</p>
-	<p>If the smile worked, you can get the full story on my <a href="about" class="link--intext link--intext--on_dark">About me</a> page. If you’d rather look at cold, hard facts, you can download my <a href="files/Nicola-Vece-Full-Stack-Developer-Resume-2025.pdf" class="link--intext link--intext--on_dark" download><strong>resume</strong></a></p>
-
-</div>
+			<div class="box--about__left">
+				<img class="mugshot" src={`${import.meta.env.BASE_URL}images/nico_vece.jpg`} alt="Nico" />
+			</div>
+			<div class="box--about__right">
+				<h4>Nico Vece</h4>
+				<p>I’m Nico, a full-stack web developer with a long background in digital product design and front-end development, based in Berlin.</p>
+				<p>Over the past 20 years I’ve been designing and building websites and web apps, and I’ve recently completed an intensive full-stack program focused on React, Angular, TypeScript, Node.js/Express, Python/Django, REST APIs, and SQL/NoSQL databases.</p>
+				<p>I like working end-to-end: from user flows and UI to accessible, production-ready frontends and pragmatic backends. Right now I’m looking for a junior to mid-level full-stack or front-end web developer role in Berlin (hybrid or remote), where I can contribute immediately on the frontend while continuing to grow my backend skills.</p>
+				<p>If the smile worked, you can get the full story on my <a href="about" class="link--intext link--intext--on_dark">About me</a> page. If you’d rather look at cold, hard facts, you can download my <a href="files/Nicola-Vece-Full-Stack-Developer-Resume-2025.pdf" class="link--intext link--intext--on_dark" download><strong>resume</strong></a></p>
+			</div>
 		</section>
 		<Footer />
 	</body>

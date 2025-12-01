@@ -21,9 +21,9 @@ const { Content } = await render(aboutEntry);
 	<h1 class="page__title--big"><strong>Nico Vece</strong></h1>
 </div>
 <div class="main main--flattop main--about">
-	<h1>
-	My full name is Nicola, but only my mom (when she's mad at me) and the tax office call me that, so let's stick with Nico. This page is about some of the things I'm proud of and love most.</h1>
-	<h1 class="margin-top">
+	<h2>
+	My full name is Nicola, but only my mom (when she's mad at me) and the tax office call me that, so let's stick with Nico. This page is about some of the things I'm proud of and love most.</h2>
+	<h2 class="margin-top">
 		<span>If you're in a hurry, here’s the TL;DR:</span>
 		<span class="hide-on-mobile">
 			download my <a href="/cf-portfolio-astro/files/nico_vece-curriculum.pdf" class="link--intext">resume</a>, browse my <a href="/cf-portfolio-astro/projects" class="link--intext">projects</a>,
@@ -34,17 +34,15 @@ const { Content } = await render(aboutEntry);
 			<a href="/cf-portfolio-astro/projects" class="link--intext">projects</a>
 			<a href="/cf-portfolio-astro/contact" class="link--intext">get in touch</a>
 		</span>
-	</h1>
+	</h2>
 	</div>
 	<section id="about-me" class="main main--flat-top box--about bg--dark">
 		<div class="box--about__left">	
 			<img class="mugshot" src={`${import.meta.env.BASE_URL}images/nico_vece.jpg`} alt="Nico" />
 		</div>
 		<div class="box--about__right">
-<h4>About me</h4>
-
-<Content />
-
-</div>
-</section>
+			<h3>About me</h3>
+			<Content />
+		</div>
+	</section>
 </Layout>
